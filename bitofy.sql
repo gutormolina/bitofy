@@ -26,7 +26,8 @@ CREATE TABLE Musica (
     duracao     int             not null, -- em segundos
     dtlanc      date            not null,
     numRep      int             not null,
-    albId       int             not null,
+    albId       int, -- se for single, o que acontece com a fkey?
+    linkMus
 
     PRIMARY KEY (musId),
     FOREIGN KEY (albId) REFERENCES Album (albId)
@@ -50,11 +51,12 @@ CREATE TABLE Usuario (
 );
 
 CREATE TABLE Escuta (
-    escId       int             not null,
+    escId       int             not null, -- add para que funcione como tabela de log
     CPF         varchar(11)     not null,
     musId       int             not null,
+    peso        int             not null,
 
-    PRIMARY KEY (escId),
+    PRIMARY KEY (escId), -- serial faz o auto incremento?
     FOREIGN KEY (CPF) REFERENCES Usuario (CPF),
     FOREIGN KEY (musId) REFERENCES Musica (musId)
 );
@@ -124,3 +126,7 @@ CREATE TABLE autoria_album (
     FOREIGN KEY (artId) REFERENCES Artista (artId),
     FOREIGN KEY (albId) REFERENCES Album (albId)
 );
+
+-- interface:
+-- criar playlist
+-- consultar musicas por genero

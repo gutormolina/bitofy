@@ -4,7 +4,7 @@ CREATE SCHEMA BITOFY AUTHORIZATION POSTGRES;
 SET search_path TO BITOFY;
 
 CREATE TABLE Genero (
-    genId       int             not null,
+    genId       serial          not null,
     nome        varchar(30)     not null,
     descr       text,
 
@@ -12,22 +12,21 @@ CREATE TABLE Genero (
 );
 
 CREATE TABLE Album (
-    albId       int             not null,
+    albId       serial          not null,
     titulo      text            not null,
     dtLanc      date            not null,
-    numFai      int             not null, -- ñ precisa (relação alb - mus já fornece esse número);
-
+    
     PRIMARY KEY (albId)
 );
 
 CREATE TABLE Musica (
-    musId       int             not null,
+    musId       serial          not null,
     titulo      text            not null,
     duracao     int             not null, -- em segundos
     dtlanc      date            not null,
     numRep      int             not null,
     albId       int, -- se for single, o que acontece com a fkey?
-    linkMus
+    linkMus     varchar(19),
 
     PRIMARY KEY (musId),
     FOREIGN KEY (albId) REFERENCES Album (albId)
@@ -51,18 +50,16 @@ CREATE TABLE Usuario (
 );
 
 CREATE TABLE Escuta (
-    escId       int             not null, -- add para que funcione como tabela de log
     CPF         varchar(11)     not null,
     musId       int             not null,
-    peso        int             not null,
+    peso        serial             not null, -- marca quantas vezes
 
-    PRIMARY KEY (escId), -- serial faz o auto incremento?
     FOREIGN KEY (CPF) REFERENCES Usuario (CPF),
     FOREIGN KEY (musId) REFERENCES Musica (musId)
 );
 
 CREATE TABLE Avaliacao (
-    avalId      int             not null,
+    avalId      serial          not null,
     nota        decimal(2,1)    not null,
     coment      text,  
     dtAval      date            not null,
@@ -76,7 +73,7 @@ CREATE TABLE Avaliacao (
 );
 
 CREATE TABLE Playlist (
-    playId      int             not null,
+    playId      serial          not null,
     titulo      varchar(30)     not null,
     dtCria      date            not null,
     CPF         varchar(11)     not null,
@@ -103,7 +100,7 @@ CREATE TABLE favorita (
 );
 
 CREATE TABLE Artista  (
-    artId       int             not null,
+    artId       serial          not null,
     CPF         varchar(11)     not null,
     biografia   text,
 

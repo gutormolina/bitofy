@@ -23,7 +23,7 @@ CREATE TABLE Musica (
     musId       serial          not null,
     titulo      text            not null,
     duracao     int             not null, -- em segundos
-    dtLanc      date            not null, -- (colocar  default)
+    dtLanc      date            not null    SET DEFAULT '0000-00-00', -- (colocar  default)
     numRep      int             not null,
     albId       int, -- se for single, o que acontece com a fkey?
     linkMus     varchar(11),

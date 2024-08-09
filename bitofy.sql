@@ -101,7 +101,7 @@ CREATE TABLE favorita (
 
 CREATE TABLE Artista  (
     artId       serial          not null,
-    CPF         varchar(11)     not null,
+    CPF         varchar(11)     not null, -- acho q n pode ser not null
     biografia   text,
 
     PRIMARY KEY (artId),
@@ -130,17 +130,23 @@ CREATE TABLE autoria_album (
 
 -- INSERTS INICIAIS:
 
+    -- Gêneros:
+
 INSERT INTO Genero (nome, descr) VALUES
     ('Rock', 'Caracterizado por um ritmo forte, geralmente tocado com guitarras elétricas, baixo e bateria.'),
     ('Pop', 'Popular, com melodias cativantes e letras acessíveis.'),
     ('MPB', 'Música Popular Brasileira, surgiu no Brasil na década de 60, caracterizada pela mistura de gêneros e expressões musicais de todo país.'),
     ('Hip-Hop', 'Envolve rimas faladas de forma rítmica sobre batidas.');
 
+    -- Álbuns:
+
 INSERT INTO Album (titulo, dtLanc) VALUES
     ('The Dark Side of the Moon', '1973-03-01'),
     ('Thriller', '1982-11-30'),
     ('Construção', '1971-11-01'),
     ('Illmatic', '1994-04-19');
+
+    -- Músicas:
 
 INSERT INTO Musica (titulo, duracao, numRep, albId, linkMus) VALUES
     ('Speak to Me', 90, 0, (SELECT albId FROM Album WHERE titulo = 'The Dark Side of the Moon'), 'O7qH5RVM7cQ'),
@@ -197,7 +203,10 @@ INSERT INTO Musica (titulo, duracao, dtlanc, numRep, albId, linkMus) VALUES
 
 UPDATE Musica SET dtLanc = '1994-04-19' WHERE albId = (SELECT albId FROM Album WHERE titulo = 'Illmatic');
 
+    -- Gêneros possuem músicas:
+
 INSERT INTO possui (musId, genId) VALUES
+    -- Pink Floyd - The Dark Side of the Moon
     ((SELECT musId FROM Musica WHERE titulo = 'Speak to Me'), (SELECT genId FROM Genero WHERE nome = 'Rock')),
     ((SELECT musId FROM Musica WHERE titulo = 'Breathe'), (SELECT genId FROM Genero WHERE nome = 'Rock')),
     ((SELECT musId FROM Musica WHERE titulo = 'On the Run'), (SELECT genId FROM Genero WHERE nome = 'Rock')),
@@ -209,6 +218,7 @@ INSERT INTO possui (musId, genId) VALUES
     ((SELECT musId FROM Musica WHERE titulo = 'Brain Damage'), (SELECT genId FROM Genero WHERE nome = 'Rock')),
     ((SELECT musId FROM Musica WHERE titulo = 'Eclipse'), (SELECT genId FROM Genero WHERE nome = 'Rock')),
     
+    -- Michael Jackson - Thriller
     ((SELECT musId FROM Musica WHERE titulo = 'Wanna Be Startin Somethin'), (SELECT genId FROM Genero WHERE nome = 'Pop')),
     ((SELECT musId FROM Musica WHERE titulo = 'Baby Be Mine'), (SELECT genId FROM Genero WHERE nome = 'Pop')),
     ((SELECT musId FROM Musica WHERE titulo = 'The Girl Is Mine'), (SELECT genId FROM Genero WHERE nome = 'Pop')),
@@ -219,6 +229,7 @@ INSERT INTO possui (musId, genId) VALUES
     ((SELECT musId FROM Musica WHERE titulo = 'P.Y.T. (Pretty Young Thing)'), (SELECT genId FROM Genero WHERE nome = 'Pop')),
     ((SELECT musId FROM Musica WHERE titulo = 'The Lady in My Life'), (SELECT genId FROM Genero WHERE nome = 'Pop')),
 
+    -- Chico Buarque - Construção
     ((SELECT musId FROM Musica WHERE titulo = 'Deus Lhe Pague'), (SELECT genId FROM Genero WHERE nome = 'MPB')),
     ((SELECT musId FROM Musica WHERE titulo = 'Cotidiano'), (SELECT genId FROM Genero WHERE nome = 'MPB')),
     ((SELECT musId FROM Musica WHERE titulo = 'Desalento'), (SELECT genId FROM Genero WHERE nome = 'MPB')),
@@ -230,6 +241,7 @@ INSERT INTO possui (musId, genId) VALUES
     ((SELECT musId FROM Musica WHERE titulo = 'Minha História'), (SELECT genId FROM Genero WHERE nome = 'MPB')),
     ((SELECT musId FROM Musica WHERE titulo = 'Acalanto'), (SELECT genId FROM Genero WHERE nome = 'MPB')),
 
+    -- Nas - Illmatic
     ((SELECT musId FROM Musica WHERE titulo = 'The Genesis'), (SELECT genId FROM Genero WHERE nome = 'Hip-Hop')),
     ((SELECT musId FROM Musica WHERE titulo = 'N.Y. State of Mind'), (SELECT genId FROM Genero WHERE nome = 'Hip-Hop')),
     ((SELECT musId FROM Musica WHERE titulo = 'Lifes a Bitch'), (SELECT genId FROM Genero WHERE nome = 'Hip-Hop')),
@@ -240,3 +252,90 @@ INSERT INTO possui (musId, genId) VALUES
     ((SELECT musId FROM Musica WHERE titulo = 'One Time 4 Your Mind'), (SELECT genId FROM Genero WHERE nome = 'Hip-Hop')),
     ((SELECT musId FROM Musica WHERE titulo = 'Represent'), (SELECT genId FROM Genero WHERE nome = 'Hip-Hop')),
     ((SELECT musId FROM Musica WHERE titulo = 'It Aint Hard to Tell'), (SELECT genId FROM Genero WHERE nome = 'Hip-Hop'));
+
+-- Usuários:
+
+INSERT INTO Usuario (CPF, nome, email, senha) VALUES
+    ('12345678909', 'Augusto', 'armolina@inf.ufpel.edu.br', 'gutoadmin123'),
+    ('09876543212', 'Luiz Filipe', 'lsfbido@inf.ufpel.edu.br', 'bidoadmin123');
+    ('00000000000', 'Pink Floyd', 'pinkfloyd@pf.com', 'floydpink'),
+    ('11111111111', 'Michael Jackson', 'michael@mj.com', 'jackmich'),
+    ('22222222222', 'Chico Buarque', 'chico@cb.com', 'buarquechico'),
+    ('33333333333', 'Nas', 'nas@nas.com', 'sannas');
+
+-- Artistas: (artistas precisam ser usuários, isso faz com que precise de um cpf (oq eh estranho))
+
+INSERT INTO Artista (CPF, biografia) VALUES
+    ('00000000000', 'Uma das bandas de rock mais influentes e icônicas da história da música, formada em Londres em 1965. A banda alcançou sucesso mundial com álbuns conceituais como The Dark Side of the Moon (1973), Wish You Were Here (1975), e The Wall (1979), que são conhecidos por suas letras profundas, sons inovadores, e produções complexas.'),
+    ('11111111111', 'Conhecido como o "Rei do Pop", foi um cantor, compositor e dançarino norte-americano que se tornou uma das figuras mais populares e influentes na história da música. Ele lançou sua carreira solo na década de 1970 e alcançou um sucesso fenomenal com álbuns como Off the Wall (1979), Thriller (1982) — o álbum mais vendido de todos os tempos — e Bad (1987).'),
+    ('22222222222', 'É um dos compositores, cantores e escritores mais proeminentes do Brasil. Durante a ditadura militar no Brasil, suas canções frequentemente carregavam críticas sociais sutis, o que o levou a ser censurado várias vezes. Álbuns como Construção (1971) são considerados marcos da música brasileira.'),
+    ('33333333333', 'É um rapper, compositor e produtor norte-americano. Se tornou um dos maiores nomes do rap ao lançar seu álbum de estreia, Illmatic, em 1994, amplamente considerado um dos melhores álbuns de hip hop de todos os tempos.');
+
+-- Autoria álbum:
+
+INSERT INTO autoria_album (artId, albId) VALUES
+    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT albId FROM Album WHERE titulo = 'The Dark Side of the Moon')),
+    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT albId FROM Album WHERE titulo = 'Thriller')),
+    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT albId FROM Album WHERE titulo = 'Construção')),
+    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT albId FROM Album WHERE titulo = 'Illmatic'));
+
+-- Autoria música:
+
+INSERT INTO autoria_musica (artId, musId) VALUES
+    -- Pink Floyd - The Dark Side of the Moon
+    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Speak to Me')),
+    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Breathe')),
+    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'On the Run')),
+    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Time')),
+    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'The Great Gig in the Sky')),
+    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Money')),
+    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Us and Them')),
+    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Any Colour You Like')),
+    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Brain Damage')),
+    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Eclipse')),
+
+    -- Michael Jackson - Thriller
+    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'Wanna Be Startin Somethin')),
+    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'Baby Be Mine')),
+    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'The Girl Is Mine')),
+    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'Thriller')),
+    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'Beat It')),
+    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'Billie Jean')),
+    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'Human Nature')),
+    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'P.Y.T. (Pretty Young Thing)')),
+    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'The Lady in My Life')),
+
+    -- Chico Buarque - Construção
+    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Deus Lhe Pague')),
+    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Cotidiano')),
+    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Desalento')),
+    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Construção')),
+    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Cordão')),
+    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Olha Maria')),
+    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Samba de Orly')),
+    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Valsinha')),
+    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Minha História')),
+    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Acalanto')),
+
+    -- Nas - Illmatic
+    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'The Genesis')),
+    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'N.Y. State of Mind')),
+    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'Lifes a Bitch')),
+    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'The World Is Yours')),
+    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'Halftime')),
+    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'Memory Lane (Sittin in da Park)')),
+    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'One Love')),
+    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'One Time 4 Your Mind')),
+    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'Represent')),
+    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'It Aint Hard to Tell'));
+
+-- Playlist:
+
+INSERT INTO Playlist (titulo, dtCria, CPF) VALUES
+    ('Playlist do Guto', '2024-08-09', '12345678909');
+
+INSERT INTO musica_playlist (playId, musId);
+    ((SELECT playId FROM Playlist WHERE titulo = 'Playlist do Guto'), (SELECT musId FROM Musica WHERE titulo = 'Money')),
+    ((SELECT playId FROM Playlist WHERE titulo = 'Playlist do Guto'), (SELECT musId FROM Musica WHERE titulo = 'Beat It')),
+    ((SELECT playId FROM Playlist WHERE titulo = 'Playlist do Guto'), (SELECT musId FROM Musica WHERE titulo = 'Deus Lhe Pague')),
+    ((SELECT playId FROM Playlist WHERE titulo = 'Playlist do Guto'), (SELECT musId FROM Musica WHERE titulo = 'N.Y. State of Mind'));

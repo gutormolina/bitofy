@@ -23,7 +23,7 @@ CREATE TABLE Musica (
     musId       serial          not null,
     titulo      text            not null,
     duracao     int             not null, -- em segundos
-    dtLanc      date            not null    SET DEFAULT '0000-00-00', -- (colocar  default)
+    dtLanc      date            not null,
     numRep      int             not null,
     albId       int, -- se for single, o que acontece com a fkey?
     linkMus     varchar(11),
@@ -31,6 +31,9 @@ CREATE TABLE Musica (
     PRIMARY KEY (musId),
     FOREIGN KEY (albId) REFERENCES Album (albId)
 );
+
+ALTER TABLE Musica ALTER COLUMN dtLanc SET DEFAULT '2024-08-09';
+
 
 CREATE TABLE possui (
     musId       int             not null,
@@ -43,7 +46,7 @@ CREATE TABLE possui (
 CREATE TABLE Usuario (
     CPF         varchar(11)     not null,
     nome        varchar(30)     not null,
-    email       varchar(MAX)    not null,
+    email       varchar(255)    not null,
     senha       varchar(30)     not null,
 
     PRIMARY KEY (CPF)
@@ -69,7 +72,7 @@ CREATE TABLE Avaliacao (
     PRIMARY KEY (avalId),
     FOREIGN KEY (CPF) REFERENCES Usuario (CPF),
     FOREIGN KEY (musId) REFERENCES Musica (musId),
-    CONSTRAINT verifNota CHECK (nota >= 0 AND nota <-= 5)
+    CONSTRAINT verifNota CHECK (nota >= 0 AND nota <= 5)
 );
 
 CREATE TABLE Playlist (
@@ -163,7 +166,7 @@ INSERT INTO Musica (titulo, duracao, numRep, albId, linkMus) VALUES
 UPDATE Musica SET dtLanc = '1973-03-01' WHERE albId = (SELECT albId FROM Album WHERE titulo = 'The Dark Side of the Moon');
 
 INSERT INTO Musica (titulo, duracao, numRep, albId, linkMus) VALUES
-    ('Wanna Be Startin Somethin', 362 0, (SELECT albId FROM Album WHERE titulo = 'Thriller'), '4Uj3zitETs4'),
+    ('Wanna Be Startin Somethin', 362, 0, (SELECT albId FROM Album WHERE titulo = 'Thriller'), '4Uj3zitETs4'),
     ('Baby Be Mine', 259, 0, (SELECT albId FROM Album WHERE titulo = 'Thriller'), 'rD7IVKEXKHA'),
     ('The Girl Is Mine', 221, 0, (SELECT albId FROM Album WHERE titulo = 'Thriller'), 'bOmKTxZAtOU'),
     ('Thriller', 358, 0, (SELECT albId FROM Album WHERE titulo = 'Thriller'), 'sOnqjkJTMaA'),
@@ -189,7 +192,7 @@ INSERT INTO Musica (titulo, duracao, numRep, albId, linkMus) VALUES
 
 UPDATE Musica SET dtLanc = '1971-11-01' WHERE albId = (SELECT albId FROM Album WHERE titulo = 'Construção');
 
-INSERT INTO Musica (titulo, duracao, dtlanc, numRep, albId, linkMus) VALUES
+INSERT INTO Musica (titulo, duracao, numRep, albId, linkMus) VALUES
     ('The Genesis', 112, 0, (SELECT albId FROM Album WHERE titulo = 'Illmatic'), 'tiXOQn6XSHM'),
     ('N.Y. State of Mind', 290, 0, (SELECT albId FROM Album WHERE titulo = 'Illmatic'), 'UKjj4hk0pV4'),
     ('Lifes a Bitch', 217, 0, (SELECT albId FROM Album WHERE titulo = 'Illmatic'), '-T9DX0I6_NE'),
@@ -257,7 +260,7 @@ INSERT INTO possui (musId, genId) VALUES
 
 INSERT INTO Usuario (CPF, nome, email, senha) VALUES
     ('12345678909', 'Augusto', 'armolina@inf.ufpel.edu.br', 'gutoadmin123'),
-    ('09876543212', 'Luiz Filipe', 'lsfbido@inf.ufpel.edu.br', 'bidoadmin123');
+    ('09876543212', 'Luiz Filipe', 'lsfbido@inf.ufpel.edu.br', 'bidoadmin123'),
     ('00000000000', 'Pink Floyd', 'pinkfloyd@pf.com', 'floydpink'),
     ('11111111111', 'Michael Jackson', 'michael@mj.com', 'jackmich'),
     ('22222222222', 'Chico Buarque', 'chico@cb.com', 'buarquechico'),
@@ -334,7 +337,7 @@ INSERT INTO autoria_musica (artId, musId) VALUES
 INSERT INTO Playlist (titulo, dtCria, CPF) VALUES
     ('Playlist do Guto', '2024-08-09', '12345678909');
 
-INSERT INTO musica_playlist (playId, musId);
+INSERT INTO musica_playlist (playId, musId) VALUES
     ((SELECT playId FROM Playlist WHERE titulo = 'Playlist do Guto'), (SELECT musId FROM Musica WHERE titulo = 'Money')),
     ((SELECT playId FROM Playlist WHERE titulo = 'Playlist do Guto'), (SELECT musId FROM Musica WHERE titulo = 'Beat It')),
     ((SELECT playId FROM Playlist WHERE titulo = 'Playlist do Guto'), (SELECT musId FROM Musica WHERE titulo = 'Deus Lhe Pague')),

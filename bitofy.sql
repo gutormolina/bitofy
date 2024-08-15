@@ -285,53 +285,53 @@ INSERT INTO autoria_album (nomeArt, albTit) VALUES
 
 -- Autoria música:
 
-INSERT INTO autoria_musica (artId, musId) VALUES -- mudar artId para nomeArt
+INSERT INTO autoria_musica (nomeArt, musId) VALUES -- mudar artId para nomeArt
     -- Pink Floyd - The Dark Side of the Moon
-    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Speak to Me')),
-    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Breathe')),
-    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'On the Run')),
-    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Time')),
-    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'The Great Gig in the Sky')),
-    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Money')),
-    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Us and Them')),
-    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Any Colour You Like')),
-    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Brain Damage')),
-    ((SELECT artId FROM Artista WHERE CPF = '00000000000'), (SELECT musId FROM Musica WHERE titulo = 'Eclipse')),
+    ('Pink Floyd', (SELECT musId FROM Musica WHERE titulo = 'Speak to Me')),
+    ('Pink Floyd', (SELECT musId FROM Musica WHERE titulo = 'Breathe')),
+    ('Pink Floyd', (SELECT musId FROM Musica WHERE titulo = 'On the Run')),
+    ('Pink Floyd', (SELECT musId FROM Musica WHERE titulo = 'Time')),
+    ('Pink Floyd', (SELECT musId FROM Musica WHERE titulo = 'The Great Gig in the Sky')),
+    ('Pink Floyd', (SELECT musId FROM Musica WHERE titulo = 'Money')),
+    ('Pink Floyd', (SELECT musId FROM Musica WHERE titulo = 'Us and Them')),
+    ('Pink Floyd', (SELECT musId FROM Musica WHERE titulo = 'Any Colour You Like')),
+    ('Pink Floyd', (SELECT musId FROM Musica WHERE titulo = 'Brain Damage')),
+    ('Pink Floyd', (SELECT musId FROM Musica WHERE titulo = 'Eclipse')),
 
     -- Michael Jackson - Thriller
-    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'Wanna Be Startin Somethin')),
-    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'Baby Be Mine')),
-    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'The Girl Is Mine')),
-    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'Thriller')),
-    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'Beat It')),
-    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'Billie Jean')),
-    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'Human Nature')),
-    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'P.Y.T. (Pretty Young Thing)')),
-    ((SELECT artId FROM Artista WHERE CPF = '11111111111'), (SELECT musId FROM Musica WHERE titulo = 'The Lady in My Life')),
+    ('Michael Jackson', (SELECT musId FROM Musica WHERE titulo = 'Wanna Be Startin Somethin')),
+    ('Michael Jackson', (SELECT musId FROM Musica WHERE titulo = 'Baby Be Mine')),
+    ('Michael Jackson', (SELECT musId FROM Musica WHERE titulo = 'The Girl Is Mine')),
+    ('Michael Jackson', (SELECT musId FROM Musica WHERE titulo = 'Thriller')),
+    ('Michael Jackson', (SELECT musId FROM Musica WHERE titulo = 'Beat It')),
+    ('Michael Jackson', (SELECT musId FROM Musica WHERE titulo = 'Billie Jean')),
+    ('Michael Jackson', (SELECT musId FROM Musica WHERE titulo = 'Human Nature')),
+    ('Michael Jackson', (SELECT musId FROM Musica WHERE titulo = 'P.Y.T. (Pretty Young Thing)')),
+    ('Michael Jackson', (SELECT musId FROM Musica WHERE titulo = 'The Lady in My Life')),
 
     -- Chico Buarque - Construção
-    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Deus Lhe Pague')),
-    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Cotidiano')),
-    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Desalento')),
-    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Construção')),
-    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Cordão')),
-    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Olha Maria')),
-    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Samba de Orly')),
-    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Valsinha')),
-    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Minha História')),
-    ((SELECT artId FROM Artista WHERE CPF = '22222222222'), (SELECT musId FROM Musica WHERE titulo = 'Acalanto')),
+    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Deus Lhe Pague')),
+    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Cotidiano')),
+    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Desalento')),
+    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Construção')),
+    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Cordão')),
+    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Olha Maria')),
+    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Samba de Orly')),
+    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Valsinha')),
+    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Minha História')),
+    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Acalanto')),
 
     -- Nas - Illmatic
-    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'The Genesis')),
-    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'N.Y. State of Mind')),
-    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'Lifes a Bitch')),
-    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'The World Is Yours')),
-    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'Halftime')),
-    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'Memory Lane (Sittin in da Park)')),
-    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'One Love')),
-    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'One Time 4 Your Mind')),
-    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'Represent')),
-    ((SELECT artId FROM Artista WHERE CPF = '33333333333'), (SELECT musId FROM Musica WHERE titulo = 'It Aint Hard to Tell'));
+    ('Nas', (SELECT musId FROM Musica WHERE titulo = 'The Genesis')),
+    ('Nas', (SELECT musId FROM Musica WHERE titulo = 'N.Y. State of Mind')),
+    ('Nas', (SELECT musId FROM Musica WHERE titulo = 'Lifes a Bitch')),
+    ('Nas', (SELECT musId FROM Musica WHERE titulo = 'The World Is Yours')),
+    ('Nas', (SELECT musId FROM Musica WHERE titulo = 'Halftime')),
+    ('Nas', (SELECT musId FROM Musica WHERE titulo = 'Memory Lane (Sittin in da Park)')),
+    ('Nas', (SELECT musId FROM Musica WHERE titulo = 'One Love')),
+    ('Nas', (SELECT musId FROM Musica WHERE titulo = 'One Time 4 Your Mind')),
+    ('Nas', (SELECT musId FROM Musica WHERE titulo = 'Represent')),
+    ('Nas', (SELECT musId FROM Musica WHERE titulo = 'It Aint Hard to Tell'));
 
 -- Playlist:
 

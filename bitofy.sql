@@ -4,10 +4,10 @@ CREATE SCHEMA BITOFY AUTHORIZATION POSTGRES;
 SET search_path TO BITOFY;
 
 CREATE TABLE Genero (
-    genTit        varchar(30)     unique,
+    genTit      varchar(30)     unique,
     descr       text,
 
-    PRIMARY KEY (genId)
+    PRIMARY KEY (genTit)
 );
 
 CREATE TABLE Album (
@@ -35,10 +35,10 @@ ALTER TABLE Musica ALTER COLUMN dtLanc SET DEFAULT '2024-08-09';
 
 CREATE TABLE possui (
     musId       int             not null,
-    genId       int             not null,
+    genTit      varchar(30)     not null,
 
     FOREIGN KEY (musId) REFERENCES Musica (musId), -- precisa indicar que estas são primárias tbm?
-    FOREIGN KEY (genId) REFERENCES Genero (genId)
+    FOREIGN KEY (genTit) REFERENCES Genero (genTit)
 );
 
 CREATE TABLE Usuario (
@@ -53,9 +53,9 @@ CREATE TABLE Usuario (
 CREATE TABLE Escuta (
     usuId       serial          not null,
     musId       int             not null,
-    peso        serial          not null, -- marca quantas vezes
+    peso        int             not null, -- marca quantas vezes
 
-    FOREIGN KEY (CPF) REFERENCES Usuario (CPF),
+    FOREIGN KEY (usuId) REFERENCES Usuario (usuId),
     FOREIGN KEY (musId) REFERENCES Musica (musId)
 );
 
@@ -64,7 +64,7 @@ CREATE TABLE Avaliacao (
     nota        decimal(2,1)    not null,
     coment      text,  
     dtAval      date            not null,
-    usuId       serial          not null,
+    usuId       int             not null,
     musId       int             not null,
 
     PRIMARY KEY (avalId),
@@ -77,7 +77,7 @@ CREATE TABLE Playlist (
     playId      serial          not null,
     titulo      varchar(30)     not null,
     dtCria      date            not null,
-    usuId       serial          not null,
+    usuId       int             not null,
 
     PRIMARY KEY (playId),
     FOREIGN KEY (usuId) REFERENCES Usuario (usuId)
@@ -92,7 +92,7 @@ CREATE TABLE musica_playlist (
 );
 
 CREATE TABLE favorita (
-    usuId       serial          not null,
+    usuId       int             not null,
     musId       int             not null,
     dtAdic      date            not null,
 

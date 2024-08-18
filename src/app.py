@@ -10,7 +10,7 @@ def startBd():
     return connection, cursor
 
 # FUNÇÃO DO MENU DE LOGIN
-def login_menu(cursor):
+def login_menu(cursor, connection):
     print("Bem-vindo ao Bitofy")
     print("Digite 1 para fazer login")
     print("Digite 2 para fazer cadastro")
@@ -125,14 +125,14 @@ def getPlaylist(cursor, params):
 def getFavoriteMusic(cursor, params):
     try:
         cursor.execute("""
-          SELECT m.titulo as Titulo
-          FROM Musica m
-          JOIN escuta e ON m.musId = e.musId
-          JOIN Usuario u ON e.usuId = u.usuId
-          WHERE u.usuId = %s
-          GROUP BY m.titulo
-          ORDER BY COUNT(m.titulo) DESC
-          LIMIT 1;
+            SELECT m.titulo as Titulo
+            FROM Musica m
+            JOIN escuta e ON m.musId = e.musId
+            JOIN Usuario u ON e.usuId = u.usuId
+            WHERE u.usuId = %s
+            GROUP BY m.titulo
+            ORDER BY MAX(e.peso) DESC
+            LIMIT 1;
         """, (params,))
         result = cursor.fetchone()
         return result[0] if result else None
@@ -176,7 +176,7 @@ def getGenreFavorite(cursor, params):
 
 import webbrowser
 
-def openMusic(cursor, params):
+def openMusic(cursor, params, userId, connection):
     try:
         cursor.execute("""
           SELECT m.linkMus as Link
@@ -188,18 +188,42 @@ def openMusic(cursor, params):
         if result:
             link = result[0]
 
+            # Abre o link da música no navegador
             webbrowser.open(f"https://www.youtube.com/watch?v={link}")
 
             cursor.execute("""
-                INSERT INTO escuta (musId, peso) 
-                VALUES (
-                    (SELECT musId FROM Musica WHERE titulo = %s),
-                    (SELECT COALESCE(MAX(peso), 0) + 1 FROM escuta WHERE musId = (SELECT musId FROM Musica WHERE titulo = %s))
-                )
-            """, (params, params))
-            cursor.connection.commit()
+                SELECT musId
+                FROM Musica m
+                WHERE m.titulo = %s
+            """, (params,))
+            musicaId = cursor.fetchone()[0]  # Extraindo musId da tupla retornada
+
+            # Verifica se a música já foi ouvida pelo usuário
+            cursor.execute("""
+                SELECT peso 
+                FROM escuta 
+                WHERE usuId = %s AND musId = %s
+            """, (userId, musicaId))
+            escuta = cursor.fetchone()
+
+            if escuta is None:
+                # Se não houver registro, insere um novo
+                cursor.execute("""
+                    INSERT INTO escuta (usuId, musId, peso)
+                    VALUES (%s, %s, 1)
+                """, (userId, musicaId))
+            else:
+                # Se já houver registro, atualiza o peso
+                cursor.execute("""
+                    UPDATE escuta SET peso = peso + 1
+                    WHERE usuId = %s AND musId = %s
+                """, (userId, musicaId))
+
+            connection.commit()
+
         else:
             print("Música não encontrada.")
+    
     except Exception as e:
         print(f"Erro ao abrir música: {e}")
 
@@ -210,7 +234,7 @@ def main():
     
     # MENU DE LOGIN
     while True:
-        login = login_menu(cursor)
+        login = login_menu(cursor, connection)
         if login[1]:
             emailLogin = login[0]
             break
@@ -289,7 +313,8 @@ def main():
 
         elif choice == "7":
           nomeMusica = input("Digite o nome da música: ")
-          openMusic(cursor, nomeMusica)
+          usuId = getUserId(cursor, emailLogin)
+          openMusic(cursor, nomeMusica, usuId, connection)
           if openMusic:
               print("Música aberta com sucesso")
           else:

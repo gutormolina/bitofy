@@ -1,6 +1,6 @@
 import psycopg2
 
-# Connect to your postgres DB
+# Conexão com DB postgres
 def getConnection():
   return psycopg2.connect(
   dbname = "bitofy",

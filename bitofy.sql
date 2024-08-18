@@ -62,14 +62,13 @@ CREATE TABLE Escuta (
 );
 
 CREATE TABLE Avaliacao (
-    avalId      serial          not null, --spa n precisa (pode ser musId, usuId)
     nota        decimal(2,1)    not null,
     coment      text,  
     dtAval      date            not null,
     usuId       int             not null,
     musId       int             not null,
 
-    PRIMARY KEY (avalId),
+    PRIMARY KEY (usuId, musId),
     FOREIGN KEY (usuId) REFERENCES Usuario (usuId),
     FOREIGN KEY (musId) REFERENCES Musica (musId),
     CONSTRAINT verifNota CHECK (nota >= 0 AND nota <= 5)

@@ -174,6 +174,8 @@ def getGenreFavorite(cursor, params):
         print(f"Erro ao buscar gênero favorito: {e}")
         return None
 
+import webbrowser
+
 def openMusic(cursor, params):
     try:
         cursor.execute("""
@@ -182,10 +184,25 @@ def openMusic(cursor, params):
           WHERE m.titulo = %s
         """, (params,))
         result = cursor.fetchone()
-        webbrowser.open(f"https://www.youtube.com/watch?v={result[0]}")
+        
+        if result:
+            link = result[0]
+
+            webbrowser.open(f"https://www.youtube.com/watch?v={link}")
+
+            cursor.execute("""
+                INSERT INTO escuta (musId, peso) 
+                VALUES (
+                    (SELECT musId FROM Musica WHERE titulo = %s),
+                    (SELECT COALESCE(MAX(peso), 0) + 1 FROM escuta WHERE musId = (SELECT musId FROM Musica WHERE titulo = %s))
+                )
+            """, (params, params))
+            cursor.connection.commit()
+        else:
+            print("Música não encontrada.")
     except Exception as e:
         print(f"Erro ao abrir música: {e}")
-        return None
+
         
 # APLICAÇÃO
 def main():

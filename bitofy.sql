@@ -4,14 +4,14 @@ CREATE SCHEMA BITOFY AUTHORIZATION POSTGRES;
 SET search_path TO BITOFY;
 
 CREATE TABLE Genero (
-    genTit      varchar(30)     unique,
+    genTit      varchar(30),
     descr       text,
 
     PRIMARY KEY (genTit)
 );
 
 CREATE TABLE Album (
-    titAlb      text            unique,
+    titAlb      text,
     dtLanc      date            not null,
     
     PRIMARY KEY (titAlb)
@@ -104,16 +104,14 @@ CREATE TABLE favorita (
 );
 
 CREATE TABLE Artista  (
-    nomeArt     varchar (30)    unique,
-    usuId       int             not null,
+    nomeArt     varchar (30),
     biografia   text,
 
-    PRIMARY KEY (usuId),
-    FOREIGN KEY (usuId) REFERENCES Usuario (usuId)
+    PRIMARY KEY (nomeArt)
 );
 
 CREATE TABLE autoria_musica (
-    nomeArt     varchar(30)     unique,
+    nomeArt     varchar(30)			not null,
     musId       int             not null,
 
     PRIMARY KEY (nomeArt, musId),
@@ -122,8 +120,8 @@ CREATE TABLE autoria_musica (
 );
 
 CREATE TABLE autoria_album (
-    nomeArt     varchar(30)     unique,
-    titAlb      text            unique,
+    nomeArt     varchar(30)    not null,
+    titAlb      text           not null,
 
     PRIMARY KEY (nomeArt, titAlb),
     FOREIGN KEY (nomeArt) REFERENCES Artista (nomeArt),
@@ -167,9 +165,9 @@ INSERT INTO Musica (titulo, duracao, numRep, titAlb, linkMus) VALUES
     ('Brain Damage', 228, 0, 'The Dark Side of the Moon', 'DVQ3-Xe_suY'),
     ('Eclipse', 123, 0, 'The Dark Side of the Moon', 'P8Ds8ByYYXs');
 
-UPDATE Musica SET dtLanc = '1973-03-01' WHERE albTit = 'The Dark Side of the Moon';
+UPDATE Musica SET dtLanc = '1973-03-01' WHERE titAlb = 'The Dark Side of the Moon';
 
-INSERT INTO Musica (titulo, duracao, numRep, albTit, linkMus) VALUES
+INSERT INTO Musica (titulo, duracao, numRep, titAlb, linkMus) VALUES
     ('Wanna Be Startin Somethin', 362, 0, 'Thriller', '4Uj3zitETs4'),
     ('Baby Be Mine', 259, 0, 'Thriller', 'rD7IVKEXKHA'),
     ('The Girl Is Mine', 221, 0, 'Thriller', 'bOmKTxZAtOU'),
@@ -180,9 +178,9 @@ INSERT INTO Musica (titulo, duracao, numRep, albTit, linkMus) VALUES
     ('P.Y.T. (Pretty Young Thing)', 239, 0, 'Thriller', '1pqcHzgGuDQ'),
     ('The Lady in My Life', 298, 0, 'Thriller', 'h7Bes8YYa_4');
 
-UPDATE Musica SET dtLanc = '1982-11-30' WHERE albTit = 'Thriller';
+UPDATE Musica SET dtLanc = '1982-11-30' WHERE titAlb = 'Thriller';
 
-INSERT INTO Musica (titulo, duracao, numRep, albTit, linkMus) VALUES
+INSERT INTO Musica (titulo, duracao, numRep, titAlb, linkMus) VALUES
     ('Deus Lhe Pague', 226, 0, 'Construção', 'eZ8nP1xqfHM'),
     ('Cotidiano', 169, 0, 'Construção', 'MAeJr-p0tnY'),
     ('Desalento', 123, 0, 'Construção', 'Q9nsE_JzbiM'),
@@ -194,9 +192,9 @@ INSERT INTO Musica (titulo, duracao, numRep, albTit, linkMus) VALUES
     ('Minha História', 173, 0, 'Construção', 'N6xHMB6GNTY'),
     ('Acalanto', 217, 0, 'Construção', 'VWiGFmnUy84');
 
-UPDATE Musica SET dtLanc = '1971-11-01' WHERE albTit = 'Construção';
+UPDATE Musica SET dtLanc = '1971-11-01' WHERE titAlb = 'Construção';
 
-INSERT INTO Musica (titulo, duracao, numRep, albTit, linkMus) VALUES
+INSERT INTO Musica (titulo, duracao, numRep, titAlb, linkMus) VALUES
     ('The Genesis', 112, 0, 'Illmatic', 'tiXOQn6XSHM'),
     ('N.Y. State of Mind', 290, 0, 'Illmatic', 'UKjj4hk0pV4'),
     ('Lifes a Bitch', 217, 0, 'Illmatic', '-T9DX0I6_NE'),
@@ -208,7 +206,7 @@ INSERT INTO Musica (titulo, duracao, numRep, albTit, linkMus) VALUES
     ('Represent', 241, 0, 'Illmatic', 'bP3UqJkTYr8'),
     ('It Aint Hard to Tell', 229, 0, 'Illmatic', 'ZlT6n9F5T4I');
 
-UPDATE Musica SET dtLanc = '1994-04-19' WHERE albTit = 'Illmatic';
+UPDATE Musica SET dtLanc = '1994-04-19' WHERE titAlb = 'Illmatic';
 
     -- Gêneros possuem músicas:
 
@@ -272,15 +270,15 @@ INSERT INTO Usuario (nome, email, senha) VALUES
 
     -- Artistas:
 
-INSERT INTO Artista (usuId, nomeArt, biografia) VALUES
-    (2, 'Pink Floyd', 'Uma das bandas de rock mais influentes e icônicas da história da música, formada em Londres em 1965. A banda alcançou sucesso mundial com álbuns conceituais como The Dark Side of the Moon (1973), Wish You Were Here (1975), e The Wall (1979), que são conhecidos por suas letras profundas, sons inovadores, e produções complexas.'),
-    (3, 'Michael Jackson', 'Conhecido como o "Rei do Pop", foi um cantor, compositor e dançarino norte-americano que se tornou uma das figuras mais populares e influentes na história da música. Ele lançou sua carreira solo na década de 1970 e alcançou um sucesso fenomenal com álbuns como Off the Wall (1979), Thriller (1982) — o álbum mais vendido de todos os tempos — e Bad (1987).'),
-    (4, 'Chicho Buarque', 'É um dos compositores, cantores e escritores mais proeminentes do Brasil. Durante a ditadura militar no Brasil, suas canções frequentemente carregavam críticas sociais sutis, o que o levou a ser censurado várias vezes. Álbuns como Construção (1971) são considerados marcos da música brasileira.'),
-    (5, 'Nas', 'É um rapper, compositor e produtor norte-americano. Se tornou um dos maiores nomes do rap ao lançar seu álbum de estreia, Illmatic, em 1994, amplamente considerado um dos melhores álbuns de hip hop de todos os tempos.');
+INSERT INTO Artista (nomeArt, biografia) VALUES
+    ('Pink Floyd', 'Uma das bandas de rock mais influentes e icônicas da história da música, formada em Londres em 1965. A banda alcançou sucesso mundial com álbuns conceituais como The Dark Side of the Moon (1973), Wish You Were Here (1975), e The Wall (1979), que são conhecidos por suas letras profundas, sons inovadores, e produções complexas.'),
+    ('Michael Jackson', 'Conhecido como o "Rei do Pop", foi um cantor, compositor e dançarino norte-americano que se tornou uma das figuras mais populares e influentes na história da música. Ele lançou sua carreira solo na década de 1970 e alcançou um sucesso fenomenal com álbuns como Off the Wall (1979), Thriller (1982) — o álbum mais vendido de todos os tempos — e Bad (1987).'),
+    ('Chicho Buarque', 'É um dos compositores, cantores e escritores mais proeminentes do Brasil. Durante a ditadura militar no Brasil, suas canções frequentemente carregavam críticas sociais sutis, o que o levou a ser censurado várias vezes. Álbuns como Construção (1971) são considerados marcos da música brasileira.'),
+    ('Nas', 'É um rapper, compositor e produtor norte-americano. Se tornou um dos maiores nomes do rap ao lançar seu álbum de estreia, Illmatic, em 1994, amplamente considerado um dos melhores álbuns de hip hop de todos os tempos.');
 
     -- Autoria álbum:
 
-INSERT INTO autoria_album (nomeArt, albTit) VALUES
+INSERT INTO autoria_album (nomeArt, titAlb) VALUES
     ('Pink Floyd', 'The Dark Side of the Moon'),
     ('Michael Jackson', 'Thriller'),
     ('Chico Buarque', 'Construção'),

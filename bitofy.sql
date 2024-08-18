@@ -37,7 +37,8 @@ CREATE TABLE possui (
     musId       int             not null,
     genTit      varchar(30)     not null,
 
-    FOREIGN KEY (musId) REFERENCES Musica (musId), -- precisa indicar que estas são primárias tbm?
+    PRIMARY KEY (musId, genTit),
+    FOREIGN KEY (musId) REFERENCES Musica (musId),
     FOREIGN KEY (genTit) REFERENCES Genero (genTit)
 );
 
@@ -51,16 +52,17 @@ CREATE TABLE Usuario (
 );
 
 CREATE TABLE Escuta (
-    usuId       serial          not null,
+    usuId       int             not null,
     musId       int             not null,
     peso        int             not null, -- marca quantas vezes
 
+    PRIMARY KEY (usuId, musId),
     FOREIGN KEY (usuId) REFERENCES Usuario (usuId),
     FOREIGN KEY (musId) REFERENCES Musica (musId)
 );
 
 CREATE TABLE Avaliacao (
-    avalId      serial          not null,
+    avalId      serial          not null, --spa n precisa (pode ser musId, usuId)
     nota        decimal(2,1)    not null,
     coment      text,  
     dtAval      date            not null,
@@ -87,6 +89,7 @@ CREATE TABLE musica_playlist (
     playId      int             not null,
     musId       int             not null,
 
+    PRIMARY KEY (playId, musId),
     FOREIGN KEY (playId) REFERENCES Playlist (playId),
     FOREIGN KEY (musId) REFERENCES Musica (musId)
 );
@@ -103,7 +106,7 @@ CREATE TABLE favorita (
 
 CREATE TABLE Artista  (
     nomeArt     varchar (30)    unique,
-    usuId       serial          not null, -- acho q n pode ser not null
+    usuId       int             not null,
     biografia   text,
 
     PRIMARY KEY (usuId),
@@ -131,6 +134,7 @@ CREATE TABLE autoria_album (
 -- interface:
 -- criar playlist
 -- consultar musicas por genero
+-- consultar mais ouvidas por usuário
 
 -- INSERTS INICIAIS:
 
@@ -257,7 +261,7 @@ INSERT INTO possui (musId, genTit) VALUES
     ((SELECT musId FROM Musica WHERE titulo = 'Represent'), 'Hip-Hop'),
     ((SELECT musId FROM Musica WHERE titulo = 'It Aint Hard to Tell'), 'Hip-Hop');
 
--- Usuários:
+    -- Usuários:
 
 INSERT INTO Usuario (nome, email, senha) VALUES
     ('Augusto', 'armolina@inf.ufpel.edu.br', 'gutoadmin123'),
@@ -267,7 +271,7 @@ INSERT INTO Usuario (nome, email, senha) VALUES
     ('Chico Buarque', 'chico@cb.com', 'buarquechico'),
     ('Nas', 'nas@nas.com', 'sannas');
 
--- Artistas: (artistas precisam ser usuários, isso faz com que precise de um cpf (oq eh estranho))
+    -- Artistas:
 
 INSERT INTO Artista (usuId, nomeArt, biografia) VALUES
     (2, 'Pink Floyd', 'Uma das bandas de rock mais influentes e icônicas da história da música, formada em Londres em 1965. A banda alcançou sucesso mundial com álbuns conceituais como The Dark Side of the Moon (1973), Wish You Were Here (1975), e The Wall (1979), que são conhecidos por suas letras profundas, sons inovadores, e produções complexas.'),
@@ -275,7 +279,7 @@ INSERT INTO Artista (usuId, nomeArt, biografia) VALUES
     (4, 'Chicho Buarque', 'É um dos compositores, cantores e escritores mais proeminentes do Brasil. Durante a ditadura militar no Brasil, suas canções frequentemente carregavam críticas sociais sutis, o que o levou a ser censurado várias vezes. Álbuns como Construção (1971) são considerados marcos da música brasileira.'),
     (5, 'Nas', 'É um rapper, compositor e produtor norte-americano. Se tornou um dos maiores nomes do rap ao lançar seu álbum de estreia, Illmatic, em 1994, amplamente considerado um dos melhores álbuns de hip hop de todos os tempos.');
 
--- Autoria álbum:
+    -- Autoria álbum:
 
 INSERT INTO autoria_album (nomeArt, albTit) VALUES
     ('Pink Floyd', 'The Dark Side of the Moon'),
@@ -283,7 +287,7 @@ INSERT INTO autoria_album (nomeArt, albTit) VALUES
     ('Chico Buarque', 'Construção'),
     ('Nas', 'Illmatic');
 
--- Autoria música:
+    -- Autoria música:
 
 INSERT INTO autoria_musica (nomeArt, musId) VALUES -- mudar artId para nomeArt
     -- Pink Floyd - The Dark Side of the Moon
@@ -333,7 +337,7 @@ INSERT INTO autoria_musica (nomeArt, musId) VALUES -- mudar artId para nomeArt
     ('Nas', (SELECT musId FROM Musica WHERE titulo = 'Represent')),
     ('Nas', (SELECT musId FROM Musica WHERE titulo = 'It Aint Hard to Tell'));
 
--- Playlist:
+    -- Playlist:
 
 INSERT INTO Playlist (titulo, dtCria, CPF) VALUES
     ('Playlist do Guto', '2024-08-09', '12345678909');

@@ -154,57 +154,57 @@ INSERT INTO Album (titAlb, dtLanc) VALUES
     -- Músicas:
 
 INSERT INTO Musica (titulo, duracao, numRep, titAlb, linkMus) VALUES
-    ('Speak to Me', 90, 0, 'The Dark Side of the Moon', 'O7qH5RVM7cQ'),
-    ('Breathe', 163, 0, 'The Dark Side of the Moon', 'mrojrDCI02k'),
-    ('On the Run', 215, 0, 'The Dark Side of the Moon', 'Z--Xaf6PUp0'),
-    ('Time', 413, 0, 'The Dark Side of the Moon', 'JwYX52BP2Sk'),
-    ('The Great Gig in the Sky', 276, 0, 'The Dark Side of the Moon', '6Dk02J5YZT4'),
-    ('Money', 382, 0, 'The Dark Side of the Moon', '-0kcet4aPpQ'),
-    ('Us and Them', 462, 0, 'The Dark Side of the Moon', 'nDbeqj-1XOo'),
-    ('Any Colour You Like', 205, 0, 'The Dark Side of the Moon', 'ZInRE-KryGA'),
-    ('Brain Damage', 228, 0, 'The Dark Side of the Moon', 'DVQ3-Xe_suY'),
-    ('Eclipse', 123, 0, 'The Dark Side of the Moon', 'P8Ds8ByYYXs');
+    ('Speak to Me', 90, 0, 'The Dark Side of the Moon', '2o4ygOv0wKk'),
+    ('Breathe', 163, 0, 'The Dark Side of the Moon', 'stOCUPEytzg'),
+    ('On the Run', 215, 0, 'The Dark Side of the Moon', 'KrfhWmHxKQI'),
+    ('Time', 413, 0, 'The Dark Side of the Moon', 'bpnZZ14fGqE'),
+    ('The Great Gig in the Sky', 276, 0, 'The Dark Side of the Moon', 'c-8bKbAuGiA'),
+    ('Money', 382, 0, 'The Dark Side of the Moon', 'Cy4lg1w3Leo'),
+    ('Us and Them', 462, 0, 'The Dark Side of the Moon', '_It2WPW4O3s'),
+    ('Any Colour You Like', 205, 0, 'The Dark Side of the Moon', 'nlgIkOT6qJk'),
+    ('Brain Damage', 228, 0, 'The Dark Side of the Moon', 'jZEpNJ_bV6w'),
+    ('Eclipse', 123, 0, 'The Dark Side of the Moon', 'k0xGxnZFNYs');
 
 UPDATE Musica SET dtLanc = '1973-03-01' WHERE titAlb = 'The Dark Side of the Moon';
 
 INSERT INTO Musica (titulo, duracao, numRep, titAlb, linkMus) VALUES
-    ('Wanna Be Startin Somethin', 362, 0, 'Thriller', '4Uj3zitETs4'),
-    ('Baby Be Mine', 259, 0, 'Thriller', 'rD7IVKEXKHA'),
-    ('The Girl Is Mine', 221, 0, 'Thriller', 'bOmKTxZAtOU'),
-    ('Thriller', 358, 0, 'Thriller', 'sOnqjkJTMaA'),
-    ('Beat It', 258, 0, 'Thriller', 'oRdxUFDoQe0'),
-    ('Billie Jean', 294, 0, 'Thriller', 'Zi_XLOBDo_Y'),
-    ('Human Nature', 240, 0, 'Thriller', 'kqlJNt-_w2E'),
-    ('P.Y.T. (Pretty Young Thing)', 239, 0, 'Thriller', '1pqcHzgGuDQ'),
-    ('The Lady in My Life', 298, 0, 'Thriller', 'h7Bes8YYa_4');
+    ('Wanna Be Startin Somethin', 362, 0, 'Thriller', '8KWf_-ofYgI'),
+    ('Baby Be Mine', 259, 0, 'Thriller', 'COSMzAASQj4'),
+    ('The Girl Is Mine', 221, 0, 'Thriller', 'SX5vM6F57_E'),
+    ('Thriller', 358, 0, 'Thriller', 'Z85lxckrtzg'),
+    ('Beat It', 258, 0, 'Thriller', 'kOn-HdEg6AQ'),
+    ('Billie Jean', 294, 0, 'Thriller', 'Kr4EQDVETuA'),
+    ('Human Nature', 240, 0, 'Thriller', 'oqLpko9Gprs'),
+    ('P.Y.T. (Pretty Young Thing)', 239, 0, 'Thriller', 'y32ejtuxSjM'),
+    ('The Lady in My Life', 298, 0, 'Thriller', 'Eqcw7tLnrd8');
 
 UPDATE Musica SET dtLanc = '1982-11-30' WHERE titAlb = 'Thriller';
 
 INSERT INTO Musica (titulo, duracao, numRep, titAlb, linkMus) VALUES
-    ('Deus Lhe Pague', 226, 0, 'Construção', 'eZ8nP1xqfHM'),
-    ('Cotidiano', 169, 0, 'Construção', 'MAeJr-p0tnY'),
-    ('Desalento', 123, 0, 'Construção', 'Q9nsE_JzbiM'),
-    ('Construção', 393, 0, 'Construção', '4Te_lCLaM5k'),
-    ('Cordão', 150, 0, 'Construção', 'uwH4_IkIedc'),
-    ('Olha Maria', 227, 0, 'Construção', 'IsGquIoAgsk'),
-    ('Samba de Orly', 171, 0, 'Construção', 'wJD9HqzWICU'),
-    ('Valsinha', 144, 0, 'Construção', 'lsbvGkMMc7E'),
-    ('Minha História', 173, 0, 'Construção', 'N6xHMB6GNTY'),
-    ('Acalanto', 217, 0, 'Construção', 'VWiGFmnUy84');
+    ('Deus Lhe Pague', 226, 0, 'Construção', 'rxiafycMSTY'),
+    ('Cotidiano', 169, 0, 'Construção', 'dHYOVuq_Fco'),
+    ('Desalento', 123, 0, 'Construção', 'XjWSYQwR-4I'),
+    ('Construção', 393, 0, 'Construção', 'wBfVsucRe1w'),
+    ('Cordão', 150, 0, 'Construção', 'cPxuSErXvsQ'),
+    ('Olha Maria', 227, 0, 'Construção', 'SyDrAH5jrqw'),
+    ('Samba de Orly', 171, 0, 'Construção', '6OoyRyePx6o'),
+    ('Valsinha', 144, 0, 'Construção', 'RhLJFYwutUs'),
+    ('Minha História', 173, 0, 'Construção', 'gZEivZvGohs'),
+    ('Acalanto', 217, 0, 'Construção', 'TdtLk3005BM');
 
 UPDATE Musica SET dtLanc = '1971-11-01' WHERE titAlb = 'Construção';
 
 INSERT INTO Musica (titulo, duracao, numRep, titAlb, linkMus) VALUES
-    ('The Genesis', 112, 0, 'Illmatic', 'tiXOQn6XSHM'),
-    ('N.Y. State of Mind', 290, 0, 'Illmatic', 'UKjj4hk0pV4'),
-    ('Lifes a Bitch', 217, 0, 'Illmatic', '-T9DX0I6_NE'),
-    ('The World Is Yours', 257, 0, 'Illmatic', 'e5PnuIRnJW8'),
-    ('Halftime', 244, 0, 'Illmatic', 'Z9L8UvA_5a4'),
-    ('Memory Lane (Sittin in da Park)', 268, 0, 'Illmatic', 'ZXXj-t1aV9c'),
-    ('One Love', 301, 0, 'Illmatic', '5XJwwEo8Xko'),
-    ('One Time 4 Your Mind', 194, 0, 'Illmatic', '-UrIty2itEE'),
-    ('Represent', 241, 0, 'Illmatic', 'bP3UqJkTYr8'),
-    ('It Aint Hard to Tell', 229, 0, 'Illmatic', 'ZlT6n9F5T4I');
+    ('The Genesis', 112, 0, 'Illmatic', 'Y6ElJoP_2S8'),
+    ('N.Y. State of Mind', 290, 0, 'Illmatic', '77MOuc6PvNI'),
+    ('Lifes a Bitch', 217, 0, 'Illmatic', 'EUHNnVV8X2k'),
+    ('The World Is Yours', 257, 0, 'Illmatic', '8Jmeu2oTXJc'),
+    ('Halftime', 244, 0, 'Illmatic', 'uoKEDSSuzHk'),
+    ('Memory Lane (Sittin in da Park)', 268, 0, 'Illmatic', 'TWKeRXigJsE'),
+    ('One Love', 301, 0, 'Illmatic', 'vxMmUDDRsNs'),
+    ('One Time 4 Your Mind', 194, 0, 'Illmatic', 'lZ-kW_rMNHk'),
+    ('Represent', 241, 0, 'Illmatic', 'MTWhRLUxSOg'),
+    ('It Aint Hard to Tell', 229, 0, 'Illmatic', 'WwuY1uTdLJQ');
 
 UPDATE Musica SET dtLanc = '1994-04-19' WHERE titAlb = 'Illmatic';
 
@@ -262,7 +262,7 @@ INSERT INTO possui (musId, genTit) VALUES
 
 INSERT INTO Usuario (nome, email, senha) VALUES
     ('Augusto', 'armolina@inf.ufpel.edu.br', 'gutoadmin123'),
-    ('Luiz Filipe', 'lsfbido@inf.ufpel.edu.br', 'bidoadmin123');
+    ('Luiz Filipe', 'lfsbido@inf.ufpel.edu.br', 'bidoadmin123');
 
     -- Artistas:
 

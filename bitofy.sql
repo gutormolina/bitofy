@@ -262,18 +262,14 @@ INSERT INTO possui (musId, genTit) VALUES
 
 INSERT INTO Usuario (nome, email, senha) VALUES
     ('Augusto', 'armolina@inf.ufpel.edu.br', 'gutoadmin123'),
-    ('Luiz Filipe', 'lsfbido@inf.ufpel.edu.br', 'bidoadmin123'),
-    ('Pink Floyd', 'pinkfloyd@pf.com', 'floydpink'),
-    ('Michael Jackson', 'michael@mj.com', 'jackmich'),
-    ('Chico Buarque', 'chico@cb.com', 'buarquechico'),
-    ('Nas', 'nas@nas.com', 'sannas');
+    ('Luiz Filipe', 'lsfbido@inf.ufpel.edu.br', 'bidoadmin123');
 
     -- Artistas:
 
 INSERT INTO Artista (nomeArt, biografia) VALUES
     ('Pink Floyd', 'Uma das bandas de rock mais influentes e icônicas da história da música, formada em Londres em 1965. A banda alcançou sucesso mundial com álbuns conceituais como The Dark Side of the Moon (1973), Wish You Were Here (1975), e The Wall (1979), que são conhecidos por suas letras profundas, sons inovadores, e produções complexas.'),
     ('Michael Jackson', 'Conhecido como o "Rei do Pop", foi um cantor, compositor e dançarino norte-americano que se tornou uma das figuras mais populares e influentes na história da música. Ele lançou sua carreira solo na década de 1970 e alcançou um sucesso fenomenal com álbuns como Off the Wall (1979), Thriller (1982) — o álbum mais vendido de todos os tempos — e Bad (1987).'),
-    ('Chicho Buarque', 'É um dos compositores, cantores e escritores mais proeminentes do Brasil. Durante a ditadura militar no Brasil, suas canções frequentemente carregavam críticas sociais sutis, o que o levou a ser censurado várias vezes. Álbuns como Construção (1971) são considerados marcos da música brasileira.'),
+    ('Chico Buarque', 'É um dos compositores, cantores e escritores mais proeminentes do Brasil. Durante a ditadura militar no Brasil, suas canções frequentemente carregavam críticas sociais sutis, o que o levou a ser censurado várias vezes. Álbuns como Construção (1971) são considerados marcos da música brasileira.'),
     ('Nas', 'É um rapper, compositor e produtor norte-americano. Se tornou um dos maiores nomes do rap ao lançar seu álbum de estreia, Illmatic, em 1994, amplamente considerado um dos melhores álbuns de hip hop de todos os tempos.');
 
     -- Autoria álbum:
@@ -311,16 +307,16 @@ INSERT INTO autoria_musica (nomeArt, musId) VALUES -- mudar artId para nomeArt
     ('Michael Jackson', (SELECT musId FROM Musica WHERE titulo = 'The Lady in My Life')),
 
     -- Chico Buarque - Construção
-    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Deus Lhe Pague')),
-    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Cotidiano')),
-    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Desalento')),
-    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Construção')),
-    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Cordão')),
-    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Olha Maria')),
-    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Samba de Orly')),
-    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Valsinha')),
-    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Minha História')),
-    ("Chico Buarque", (SELECT musId FROM Musica WHERE titulo = 'Acalanto')),
+    ('Chico Buarque', (SELECT musId FROM Musica WHERE titulo = 'Deus Lhe Pague')),
+    ('Chico Buarque', (SELECT musId FROM Musica WHERE titulo = 'Cotidiano')),
+    ('Chico Buarque', (SELECT musId FROM Musica WHERE titulo = 'Desalento')),
+    ('Chico Buarque', (SELECT musId FROM Musica WHERE titulo = 'Construção')),
+    ('Chico Buarque', (SELECT musId FROM Musica WHERE titulo = 'Cordão')),
+    ('Chico Buarque', (SELECT musId FROM Musica WHERE titulo = 'Olha Maria')),
+    ('Chico Buarque', (SELECT musId FROM Musica WHERE titulo = 'Samba de Orly')),
+    ('Chico Buarque', (SELECT musId FROM Musica WHERE titulo = 'Valsinha')),
+    ('Chico Buarque', (SELECT musId FROM Musica WHERE titulo = 'Minha História')),
+    ('Chico Buarque', (SELECT musId FROM Musica WHERE titulo = 'Acalanto')),
 
     -- Nas - Illmatic
     ('Nas', (SELECT musId FROM Musica WHERE titulo = 'The Genesis')),
@@ -336,8 +332,8 @@ INSERT INTO autoria_musica (nomeArt, musId) VALUES -- mudar artId para nomeArt
 
     -- Playlist:
 
-INSERT INTO Playlist (titulo, dtCria, CPF) VALUES
-    ('Playlist do Guto', '2024-08-09', '12345678909');
+INSERT INTO Playlist (titulo, dtCria, usuId) VALUES
+    ('Playlist do Guto', '2024-08-09', 1);
 
 INSERT INTO musica_playlist (playId, musId) VALUES
     ((SELECT playId FROM Playlist WHERE titulo = 'Playlist do Guto'), (SELECT musId FROM Musica WHERE titulo = 'Money')),

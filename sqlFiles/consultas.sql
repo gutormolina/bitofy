@@ -63,3 +63,13 @@ where u.nome = 'User Name' -- vai ser passado pelo python
 group by a.nomeArt
 order by VezesEscutado desc
 limit 1;
+
+-- Consultar por musica mais escutada por um usuario
+SELECT m.titulo as Titulo
+FROM Musica m
+JOIN escuta e ON m.musId = e.musId
+JOIN Usuario u ON e.usuId = u.usuId
+WHERE u.usuId = %s
+GROUP BY m.titulo
+ORDER BY MAX(e.peso) DESC
+LIMIT 1;

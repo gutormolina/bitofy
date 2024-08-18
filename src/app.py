@@ -31,7 +31,6 @@ def loginIn(params):
   except:
     return
 
-  
 
 def main():
   startBd()
